@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation'
 import MDXContent from '@/components/MDXContent'
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

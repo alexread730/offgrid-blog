@@ -9,14 +9,16 @@ interface BlogPostPageProps {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getBlogPostBySlug(params.slug)
+  // Await params before using params.slug
+  const { slug } = await params
+  const post = getBlogPostBySlug(slug)
 
   if (!post) {
     notFound()
   }
 
   // Dynamically import the MDX file as a component
-  const MDXComponent = (await import(`@/content/blog/${params.slug}.mdx`)).default
+  const MDXComponent = (await import(`@/content/blog/${slug}.mdx`)).default
 
   return (
     <main className="min-h-screen bg-[#F5F5DC] py-20">
